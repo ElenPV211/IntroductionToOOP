@@ -1,16 +1,16 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
 
 class Fraction;
-Fraction operator*(Fraction left, Fraction right);// прототип функции это объявление функции
+Fraction operator*(Fraction left, Fraction right);// РїСЂРѕС‚РѕС‚РёРї С„СѓРЅРєС†РёРё СЌС‚Рѕ РѕР±СЉСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё
 Fraction operator/(const Fraction& left, const Fraction& right);
 
 class Fraction
 {
-	int integer;//целая часть
-	int numerator;//числитель
-	int denominator;//знаменатель
+	int integer;//С†РµР»Р°СЏ С‡Р°СЃС‚СЊ
+	int numerator;//С‡РёСЃР»РёС‚РµР»СЊ
+	int denominator;//Р·РЅР°РјРµРЅР°С‚РµР»СЊ
 
 public:
 
@@ -61,10 +61,10 @@ public:
 	Fraction(double decimal)
 	{
 		decimal += 1e-10;
-		integer = decimal; //сохраняем целую часть десятичной дроби
-		decimal -= integer;//Убираем целую часть издесятичной дроби
-		denominator = 1e+9; //записываем максимальго возможный знаменатель
-		numerator = decimal * denominator; //всю дробную часть десятичной дроби загружаем в числитель
+		integer = decimal; //СЃРѕС…СЂР°РЅСЏРµРј С†РµР»СѓСЋ С‡Р°СЃС‚СЊ РґРµСЃСЏС‚РёС‡РЅРѕР№ РґСЂРѕР±Рё
+		decimal -= integer;//РЈР±РёСЂР°РµРј С†РµР»СѓСЋ С‡Р°СЃС‚СЊ РёР·РґРµСЃСЏС‚РёС‡РЅРѕР№ РґСЂРѕР±Рё
+		denominator = 1e+9; //Р·Р°РїРёСЃС‹РІР°РµРј РјР°РєСЃРёРјР°Р»СЊРіРѕ РІРѕР·РјРѕР¶РЅС‹Р№ Р·РЅР°РјРµРЅР°С‚РµР»СЊ
+		numerator = decimal * denominator; //РІСЃСЋ РґСЂРѕР±РЅСѓСЋ С‡Р°СЃС‚СЊ РґРµСЃСЏС‚РёС‡РЅРѕР№ РґСЂРѕР±Рё Р·Р°РіСЂСѓР¶Р°РµРј РІ С‡РёСЃР»РёС‚РµР»СЊ
 		reduce();
 		cout << "1ArgConstructor:\t" << this << endl;
 	}
@@ -108,7 +108,7 @@ public:
 	}
 	Fraction& operator*=(const Fraction& other)
 	{
-		return *this = *this * other; // обращение к функции 
+		return *this = *this * other; // РѕР±СЂР°С‰РµРЅРёРµ Рє С„СѓРЅРєС†РёРё 
 	}
 	Fraction& operator/=(const Fraction& other)
 	{
@@ -124,7 +124,7 @@ public:
 
 	//				Type-cast operators:
 
-	explicit operator int()  //запрет неявных преобразований из типа в тип
+	explicit operator int()  //Р·Р°РїСЂРµС‚ РЅРµСЏРІРЅС‹С… РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёР№ РёР· С‚РёРїР° РІ С‚РёРї
 	{
 		return integer;
 	}
@@ -136,7 +136,7 @@ public:
 
 	//////////Metods:
 
-	Fraction& reduce()   //сокращение дроби
+	Fraction& reduce()   //СЃРѕРєСЂР°С‰РµРЅРёРµ РґСЂРѕР±Рё
 	{
 		int more, less, rest;
 		if (numerator > denominator)more = numerator, less = denominator;
@@ -147,28 +147,28 @@ public:
 			more = less;
 			less = rest;
 		} while (rest);
-		int GCD = more; //GCD - наибольший общий делитель
+		int GCD = more; //GCD - РЅР°РёР±РѕР»СЊС€РёР№ РѕР±С‰РёР№ РґРµР»РёС‚РµР»СЊ
 		numerator /= GCD;
 		denominator /= GCD;
 		return *this;
 	}
 
-	Fraction& to_improper()//перевод в неправильную дробь
+	Fraction& to_improper()//РїРµСЂРµРІРѕРґ РІ РЅРµРїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ
 	{
 		numerator += integer * denominator;
 		integer = 0;
 		return *this;
 	}
 
-	Fraction& to_proper()// перевод в правильную дробь
+	Fraction& to_proper()// РїРµСЂРµРІРѕРґ РІ РїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ
 	{
 		integer += numerator / denominator;
 		numerator %= denominator;
 		return *this;
 	}
-	Fraction inverted()const //переворот неправильной дроби для умножения при делении
+	Fraction inverted()const //РїРµСЂРµРІРѕСЂРѕС‚ РЅРµРїСЂР°РІРёР»СЊРЅРѕР№ РґСЂРѕР±Рё РґР»СЏ СѓРјРЅРѕР¶РµРЅРёСЏ РїСЂРё РґРµР»РµРЅРёРё
 	{
-		Fraction inverted = *this; //копируем объект
+		Fraction inverted = *this; //РєРѕРїРёСЂСѓРµРј РѕР±СЉРµРєС‚
 		inverted.to_improper();
 		swap(inverted.numerator, inverted.denominator);
 		return inverted;
@@ -201,42 +201,42 @@ Fraction operator+(const Fraction& left, const Fraction& right)
 	).to_proper().reduce();
 }
 Fraction operator*(Fraction left, Fraction right)
-//передаем по значению
+//РїРµСЂРµРґР°РµРј РїРѕ Р·РЅР°С‡РµРЅРёСЋ
 {
 	left.to_improper();
 	right.to_improper();
 	/*Fraction result;
 	result.set_numerator(left.get_numerator() * right.get_numerator());
 	result.set_denominator(left.get_denominator() * right.get_denominator());*/
-	/*Fraction result //сделали то же самое, что и в предыдущем и даже сет
-	//методы вызывать не пришлось, результат тот же
+	/*Fraction result //СЃРґРµР»Р°Р»Рё С‚Рѕ Р¶Рµ СЃР°РјРѕРµ, С‡С‚Рѕ Рё РІ РїСЂРµРґС‹РґСѓС‰РµРј Рё РґР°Р¶Рµ СЃРµС‚
+	//РјРµС‚РѕРґС‹ РІС‹Р·С‹РІР°С‚СЊ РЅРµ РїСЂРёС€Р»РѕСЃСЊ, СЂРµР·СѓР»СЊС‚Р°С‚ С‚РѕС‚ Р¶Рµ
 	(
 		left.get_numerator() * right.get_numerator(),
 		left.get_denominator() * right.get_denominator()
 	);
 
-	result.to_proper(); //вызывается метод перевод в правильную дробь
+	result.to_proper(); //РІС‹Р·С‹РІР°РµС‚СЃСЏ РјРµС‚РѕРґ РїРµСЂРµРІРѕРґ РІ РїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ
 
 	return result;*/
-	//создаём временный безымянный объект, и сразу же возвращаем его на место вызова.
-	//Временные безымянные  объекты существуют только в пределах одного выражения (до ;)
-	return Fraction // это объект и для него можно вызвать метод .to_proper
-		//преобразовываем в правильную дробь
+	//СЃРѕР·РґР°С‘Рј РІСЂРµРјРµРЅРЅС‹Р№ Р±РµР·С‹РјСЏРЅРЅС‹Р№ РѕР±СЉРµРєС‚, Рё СЃСЂР°Р·Сѓ Р¶Рµ РІРѕР·РІСЂР°С‰Р°РµРј РµРіРѕ РЅР° РјРµСЃС‚Рѕ РІС‹Р·РѕРІР°.
+	//Р’СЂРµРјРµРЅРЅС‹Рµ Р±РµР·С‹РјСЏРЅРЅС‹Рµ  РѕР±СЉРµРєС‚С‹ СЃСѓС‰РµСЃС‚РІСѓСЋС‚ С‚РѕР»СЊРєРѕ РІ РїСЂРµРґРµР»Р°С… РѕРґРЅРѕРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ (РґРѕ ;)
+	return Fraction // СЌС‚Рѕ РѕР±СЉРµРєС‚ Рё РґР»СЏ РЅРµРіРѕ РјРѕР¶РЅРѕ РІС‹Р·РІР°С‚СЊ РјРµС‚РѕРґ .to_proper
+		//РїСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµРј РІ РїСЂР°РІРёР»СЊРЅСѓСЋ РґСЂРѕР±СЊ
 		(
 			left.get_numerator() * right.get_numerator(),
 			left.get_denominator() * right.get_denominator()
 		).to_proper().reduce();
 }
 
-Fraction operator/(const Fraction& left, const Fraction& right) //пирнимаем поконстантной ссылке т.к.
-//конкретно в этом методе нет никаких преобразований ни лефт ни райт не преобразуются
+Fraction operator/(const Fraction& left, const Fraction& right) //РїРёСЂРЅРёРјР°РµРј РїРѕРєРѕРЅСЃС‚Р°РЅС‚РЅРѕР№ СЃСЃС‹Р»РєРµ С‚.Рє.
+//РєРѕРЅРєСЂРµС‚РЅРѕ РІ СЌС‚РѕРј РјРµС‚РѕРґРµ РЅРµС‚ РЅРёРєР°РєРёС… РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёР№ РЅРё Р»РµС„С‚ РЅРё СЂР°Р№С‚ РЅРµ РїСЂРµРѕР±СЂР°Р·СѓСЋС‚СЃСЏ
 {
-	return left * right.inverted();//умножение правой части выражения на перевёрнутую левую
+	return left * right.inverted();//СѓРјРЅРѕР¶РµРЅРёРµ РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё РІС‹СЂР°Р¶РµРЅРёСЏ РЅР° РїРµСЂРµРІС‘СЂРЅСѓС‚СѓСЋ Р»РµРІСѓСЋ
 }
 ////////////////////////////////////////
 bool operator==(Fraction left, Fraction right)
 {
-	left.to_improper();//приведение к неправильному виду
+	left.to_improper();//РїСЂРёРІРµРґРµРЅРёРµ Рє РЅРµРїСЂР°РІРёР»СЊРЅРѕРјСѓ РІРёРґСѓ
 	right.to_improper();
 	/*if (left.get_numerator() * right.get_denominator()
 		== right.get_numerator() * left.get_denominator())
@@ -282,7 +282,7 @@ bool operator>=(const Fraction& left, const Fraction& right)
 istream& operator>>(istream& is, Fraction& obj)
 
 {
-	//оператор извлечения из потока (Extraction operator)
+	//РѕРїРµСЂР°С‚РѕСЂ РёР·РІР»РµС‡РµРЅРёСЏ РёР· РїРѕС‚РѕРєР° (Extraction operator)
 
 #ifdef PRIMITIVE_EXTRACTION
 	int integer, numerator, denominator;
@@ -290,7 +290,7 @@ istream& operator>>(istream& is, Fraction& obj)
 	/*obj.set_integer(integer);
 	obj.set_numerator(numerator);
 	obj.set_denominator(denominator);
-	или можно с добавлением перегрузки оператора() внутри класса */
+	РёР»Рё РјРѕР¶РЅРѕ СЃ РґРѕР±Р°РІР»РµРЅРёРµРј РїРµСЂРµРіСЂСѓР·РєРё РѕРїРµСЂР°С‚РѕСЂР°() РІРЅСѓС‚СЂРё РєР»Р°СЃСЃР° */
 	obj(integer, numerator, denominator);
 #endif // PRITIV_EXTRACTION
 
@@ -301,11 +301,11 @@ istream& operator>>(istream& is, Fraction& obj)
 	//is >> buffer;
 	is.getline(buffer, SIZE);
 
-	int n = 0; //счетчик чисел извлеченных из строки
+	int n = 0; //СЃС‡РµС‚С‡РёРє С‡РёСЃРµР» РёР·РІР»РµС‡РµРЅРЅС‹С… РёР· СЃС‚СЂРѕРєРё
 	for (char* pch = strtok(buffer, delimiters); pch; pch = strtok(NULL, delimiters))
 		number[n++] = atoi(pch);
 	//for (int i = 0; i < n; i++)cout << number[i] << "\t"; cout << endl;
-	obj = Fraction();  // Обнуляем объект, сбрасываем его до объекта по умолчанию
+	obj = Fraction();  // РћР±РЅСѓР»СЏРµРј РѕР±СЉРµРєС‚, СЃР±СЂР°СЃС‹РІР°РµРј РµРіРѕ РґРѕ РѕР±СЉРµРєС‚Р° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
 	switch (n)
 	{
@@ -375,7 +375,7 @@ void main()
 	Fraction B(3, 4, 5);
 	B.print();
 
-	//перегружаем оператор * за классом
+	//РїРµСЂРµРіСЂСѓР¶Р°РµРј РѕРїРµСЂР°С‚РѕСЂ * Р·Р° РєР»Р°СЃСЃРѕРј
 
 	/*Fraction C = A * B;
 	C.print();
@@ -398,20 +398,20 @@ void main()
 #endif //ARIFMETICAL_OPERATORS_CHEK
 
 	/*int a, b;
-	cout << "Введите два числа: "; cin >> a >> b;
+	cout << "Р’РІРµРґРёС‚Рµ РґРІР° С‡РёСЃР»Р°: "; cin >> a >> b;
 	int c = add(a, b);*/
 
 	//cout << (Fraction(1, 3) + Fraction(5, 10)) << endl;
 #ifdef IOSTREAM_OPERATORS_CHECK
 	Fraction A(2,3,4);
 
-	cout << "Введите простую дробь: ";
+	cout << "Р’РІРµРґРёС‚Рµ РїСЂРѕСЃС‚СѓСЋ РґСЂРѕР±СЊ: ";
 	cin >> A;
 	cout << A << endl;
 	#endif//IOSTREAM_OPERATORS_CHECK
 #ifdef TYPE_CONVERSIONS_BASICS
-	//	(type)value;	//C-like notation (C-подобная форма записи)
-	//	type(value);	//Functional notation (Функциональная форма записи)
+	//	(type)value;	//C-like notation (C-РїРѕРґРѕР±РЅР°СЏ С„РѕСЂРјР° Р·Р°РїРёСЃРё)
+	//	type(value);	//Functional notation (Р¤СѓРЅРєС†РёРѕРЅР°Р»СЊРЅР°СЏ С„РѕСЂРјР° Р·Р°РїРёСЃРё)
 
 	int a = 2;		//No conversions
 	double b = 3;	//Converion from less to more
@@ -440,8 +440,8 @@ void main()
 	cout << B << endl;
 #endif // CONVERSION_FROM_OTHER_TO_CLASS
 
-	//explicit - запрещает неявные преобразования, 
-	//и оставляет возможность лишь явно преобразовывать типы.
+	//explicit - Р·Р°РїСЂРµС‰Р°РµС‚ РЅРµСЏРІРЅС‹Рµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ, 
+	//Рё РѕСЃС‚Р°РІР»СЏРµС‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ Р»РёС€СЊ СЏРІРЅРѕ РїСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°С‚СЊ С‚РёРїС‹.
 
 #ifdef CONVERSION_FROM_CLASS_TO_OTHER
 			/*
