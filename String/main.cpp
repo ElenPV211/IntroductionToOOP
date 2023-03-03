@@ -1,8 +1,10 @@
 #include<iostream>
 using namespace std;
+/// ///////////////////////////////////////////////////////////////
+/// ////////////////////назъбкемхе йкюяяю - CLASS DECLARATION  //////
 
 class String;
-String operator+(const String& left, const String& right);
+String operator+(const String& left, const String& right);//ОПНРНРХО НОЕПЮРНПЮ +
 
 class String
 {
@@ -33,6 +35,13 @@ public:
 	//---------------Methods:------------------------
 	void print()const;
 };
+/// ///////////////////////////////////////////////////////////////
+/// ///////////////////йнмеж назъбкемхъ йкюяяю - CLASS DECLARATION END //////
+
+///-----------------------------------------------------------
+
+/// ///////////////////////////////////////////////////////////////
+/// ////////////////////нопедекемхе йкюяяю - CLASS DEFINITION  //////
 
 int String::get_size()const
 {
@@ -145,7 +154,8 @@ ostream& operator<<(ostream& os, const String& obj)
 	return (os << obj.get_str());
 }
 
-
+/// ///////////////////////////////////////////////////////////////
+/// ////////////////////йнмеж нопедекемхъ йкюяяю - CLASS DEFINITION END //////
 #define HOME_WORK
 
 void main()
