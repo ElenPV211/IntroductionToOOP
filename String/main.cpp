@@ -28,7 +28,7 @@ public:
 		//this->str = new char[size] {};
 		cout << "DefConstructor:\t" << this << endl;
 	}
-	String(const char* str):size(strlen(str)+1), str(new char[size]{})
+	String(const char* str):String(strlen(str)+1)
 	{
 		//this->size = strlen(str)+1;//+1для NULL - terminatora
 
@@ -39,14 +39,13 @@ public:
 		cout << "ConstructorChar:\t" << this << endl;
 	
 	}
-	String(const String& other):size(other.size), str(new char[size]{})
+	String(const String& other):String(other.str)
 	{
 		//this->size = other.size;
 		//Deep copy (побитовое копирование)
 
 		//this->str = new char[size] {};
-		for (int i = 0; i < size; i++)
-			this->str[i] = other.str[i];
+		
 		cout << "CopyConstructor:" << this << endl;
 	}
 
@@ -159,7 +158,7 @@ void main()
 
 	//String str3 = str1 + str2; //Copy constractor
 	String str3;
-	str3 = str1 + " " + str2;
+	str3 = str1 + str2;
 	cout << str3 << endl;
 	str1 += str2;
 	cout << str1 << endl;
