@@ -22,39 +22,39 @@ public:
 		return str;
 	}
 	//				Constructors:
-	String(int size = 80)
+	explicit String(int size = 80):size(size), str(new char[size]{})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "DefConstructor:\t" << this << endl;
 	}
-	String(const char* str)
+	String(const char* str):size(strlen(str)+1), str(new char[size]{})
 	{
-		this->size = strlen(str)+1;//+1для NULL - terminatora
+		//this->size = strlen(str)+1;//+1для NULL - terminatora
 
-		this->str = new char[size] {};
+		//this->str = new char[size] {};
 
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		
 		cout << "ConstructorChar:\t" << this << endl;
 	
 	}
-	String(const String& other)
+	String(const String& other):size(other.size), str(new char[size]{})
 	{
-		this->size = other.size;
+		//this->size = other.size;
 		//Deep copy (побитовое копирование)
 
-		this->str = new char[size] {};
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
 			this->str[i] = other.str[i];
-		cout << "CopyConstructor:\t" << this << endl;
+		cout << "CopyConstructor:" << this << endl;
 	}
 
-	String(String&& other)
+	String(String&& other):size(other.size), str(other.str)
 
 	{
-		this->size = other.size;
-		this->str = other.str;
+		//this->size = other.size;
+		//this->str = other.str;
 		other.size = 0;
 		other.str = nullptr;
 		cout << "MoveConstructor:" << this << endl;
@@ -68,7 +68,7 @@ public:
 	}
 	// Operator:
 
-	String& operator=(String&& other)
+	String& operator=(String&& other) 
 	{
 		if (this == &other)return *this;
 		delete[] this->str;
@@ -164,6 +164,9 @@ void main()
 	str1 += str2;
 	cout << str1 << endl;
 
+
+	String str4 = str1;
+	cout << str4 << endl;
 
     #endif // HOME_WORK
 }
