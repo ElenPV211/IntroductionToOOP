@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 
 class String;
@@ -6,8 +6,8 @@ String operator+(const String& left, const String& right);
 
 class String
 {
-	int size;	//ðàçìåð ñòðîêè â Áàéòàõ
-	char* str;	//óêàçàòåëü íà ñòðîêó â äèíàìè÷åñêîé ïàìÿòè
+	int size;	//Ñ€Ð°Ð·Ð¼ÐµÑ€ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð² Ð‘Ð°Ð¹Ñ‚Ð°Ñ…
+	char* str;	//ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð² Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ¾Ð¹ Ð¿Ð°Ð¼ÑÑ‚Ð¸
 public:
 	int get_size()const
 	{
@@ -30,7 +30,7 @@ public:
 	}
 	String(const char* str)
 	{
-		this->size = strlen(str)+1;//+1äëÿ NULL - terminatora
+		this->size = strlen(str)+1;//+1Ð´Ð»Ñ NULL - terminatora
 
 		this->str = new char[size] {};
 
@@ -42,7 +42,7 @@ public:
 	String(const String& other)
 	{
 		this->size = other.size;
-		//Deep copy (ïîáèòîâîå êîïèðîâàíèå)
+		//Deep copy (Ð¿Ð¾Ð±Ð¸Ñ‚Ð¾Ð²Ð¾Ðµ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ)
 
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
@@ -83,17 +83,17 @@ public:
 	String& operator+=(const String& other)
 	{
 		
-			return *this = *this + other; // îáðàùåíèå ê ôóíêöèè 
+			return *this = *this + other; // Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ Ðº Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ 
 		}
 
 	String& operator=(const String& other)
 	{
-		if (this == &other)return *this;// åñëè íàøå çíà÷åíèå = òîìó çíà÷åíèþ
-		//òî ñðàçó âûõîäèì èç îïåðàòîðà ïðèñâàèâàíèÿ ÷òîáû äàííûå íå îáíóëèëèñü
+		if (this == &other)return *this;// ÐµÑÐ»Ð¸ Ð½Ð°ÑˆÐµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ = Ñ‚Ð¾Ð¼Ñƒ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸ÑŽ
+		//Ñ‚Ð¾ ÑÑ€Ð°Ð·Ñƒ Ð²Ñ‹Ñ…Ð¾Ð´Ð¸Ð¼ Ð¸Ð· Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð° Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°Ð½Ð¸Ñ Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð½Ðµ Ð¾Ð±Ð½ÑƒÐ»Ð¸Ð»Ð¸ÑÑŒ
 		delete[]this->str; 
 
 		this->size = other.size;
-		//Deep copy (ïîáèòîâîå êîïèðîâàíèå)
+		//Deep copy (Ð¿Ð¾Ð±Ð¸Ñ‚Ð¾Ð²Ð¾Ðµ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ)
 
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
