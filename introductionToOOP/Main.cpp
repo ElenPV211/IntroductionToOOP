@@ -1,13 +1,11 @@
 #include<iostream>
 using namespace std;
 
+
+//////////////////////////////////////////////////////////////////
+//////------CLASS DECLARATION------//////////////////////////////
 class Point
 {
-	//Создавая структуру или класс мы создаем новый тип данных
-	//Классы и структуры еще называют пользовательскими типами данных
-	//						КЛАСС - ЭТО ТИП ДАННЫХ!!!
-	//					СТРУКТУРА - ЭТО ТИП ДАННЫХ!!!
-
 	double x;
 	double y;
 public:
@@ -27,40 +25,83 @@ public:
 	{
 		this->y = y;
 	}
-	//  Constructors:
-	/*Point()
+	//----------Constructors:------------------------
+
+	Point(double x = 0, double y = 0) :x(x), y(y)
 	{
-		//cout << double() << endl;
-		x = y = double();
-		cout << "DefaultConstructor:\t" << this << endl;
-	}
-	Point(double x)
-	{
-		this->x = x;
-		this->y = 0;
-		cout << "1ArgConstructor:\t" << this << endl;
-	}*/
-	Point(double x = 0, double y = 0)
-	{
-		this->x = x;
-		this->y = y;
+		//this->x = x;
+		//this->y = y;
 		cout << "Constructor:\t\t" << this << endl;
 	}
+
+	Point(const Point& other) :x(other.x), y(other.y)
+	{
+		//this->x = other.x;
+		//this->y = other.y;
+		cout << "CopyConstructor:\t" << this << endl;
+	}
+
 	~Point()
 	{
 		cout << "Destructor:\t" << this << endl;
 	}
-	
+	//-------------Operators:-------------//
+
+	Point& operator = (const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
+	}
+	double distance(const Point& other)const//const делает this недоступным для изменения
+	{
+		double x_distance = this->x - other.x;
+		double y_distance = this->y - other.y;
+		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+		return distance;
+	}
 
 
-	//Metods:
+	//----------Metods:------------------
 	void print()const
 	{
 		cout << "X = " << x << "\tY = " << y << endl;
 	}
+	Point& operator++()
+	{
+		x++;
+		y++;
+		return *this;
+	}
+
 };
+////////////----END CLASS DECLARATION---/////////////
+/////////////////////////////////////////////////////
+
+Point operator+(const Point& left, const Point& right) //17.02.22023
+{
+	Point res;
+	res.set_x(left.get_x() + right.get_x());
+	res.set_y(left.get_y() + right.get_y());
+	return res;
+
+}
+
+double distance(const Point& A, const Point& B)
+{
+	double x_distance = A.get_x() - B.get_x();
+	double y_distance = A.get_y() - B.get_y();
+	double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+	return distance;
+}
+
 
 //#define STRUCT_POINT //имя макроса
+//#define CONSTRUCTOR_CHECK
+//#define DISTANCE_CHECK
+//#define ASSIGMENT_CHECK
+
 void main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -79,6 +120,7 @@ void main()
 	cout << pA->x << "\t" << pA->y << endl;
 #endif //STRUCT_POINT
 
+#ifdef CONSTRUCTOR_CHECK
 	Point A; //Здесь вызывается конструктор по умолчанию (Default
 	//A.set_x(2);
 	//A.set_y(3);
@@ -89,35 +131,49 @@ void main()
 
 	Point C(22, 33);
 	C.print();
-	}
+	Point D = C;
+	D.print();
 
+	Point E;
+	E = D; //Copy assignment
+	E.print();
 
-/*
---------------------------------------------------------------
-.  - Оператор прямого доступа (Point operator)
-	 используется для доступа к полям объекта по ИМЕНИ объекта.
--> - Оператор косвенного доступа (Arrow operator)
-	 используется для доступа к полям объекта по АДРЕСУ объекта.
---------------------------------------------------------------
-*/
+#endif CONSTRUCTOR_CHECK
+#ifdef DISTANCE_CHECK
+	Point A(2, 3);
+	A.print();
+	Point B(4, 5);
+	B.print();
+	cout << delimiter << endl;
+	cout << "Расстояние от точки А до точки В: " << A.distance(B) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние от точки В до точки А: " << B.distance(A) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние между точками А и В: " << distance(A, B) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние между точками B и A: " << distance(B, A) << endl;
+	cout << delimiter << endl;
+#endif //DISTANCE_CHECK
 
-/*
---------------------------------------------------------------
-				OOP concepts:
-1. Encapsulation - сокрытие определенной части класса от внешнего мира.
-	Модификаторы доступа
-		private:	закрытые поля, доступны только внутри класса
-		public:		открытые поля, доступны из любого места программы
-		protected:	защищенные поля, доступны только внутри класса, и его дочерних классов.
-					используется только при наследовании.
-	get/set-методы  используются для доступа к закрытым переменным в классе
-		get (взять, получить) используются для доступа к закрытым переменным на чтение, т.е.,
-							  позволяют получить значение закрытой переменной.
-		set (задать, установить) используются для доступа к закрытым перемееным на запись, т.е.,
-							  позволяют задать значение закрытой переменной.
-							  Кроме того, set-методы обеспечивают фильтрацию данных.
-2. Inheritance;
-3. Polymorphism;
---------------------------------------------------------------
-*/
+#ifdef ASSIGMENT_CHECK
+	//Copy assigment:
+	int a, b, c;
+	a = b = c = 2;
+	std::cout << a << "\t" << b << "\t" << c << endl;
+
+	Point A, B, C;
+	A = B = C = Point(2, 3);
+	A.print();
+	B.print();
+	C.print();
+#endif ASSIGMENT_CHECK
+	int a = 2;
+	int b = 3;
+	int c = a + b;
+
+	Point A(2, 3); A.print();
+	Point B(4, 5); B.print();
+	Point C = A + B; C.print();
+
+}
 
