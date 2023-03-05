@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 
@@ -17,7 +17,7 @@ public:
 	{
 		return y;
 	}
-	void set_x(double x) //обычно set ничего не возвращают поэтому void
+	void set_x(double x) //РѕР±С‹С‡РЅРѕ set РЅРёС‡РµРіРѕ РЅРµ РІРѕР·РІСЂР°С‰Р°СЋС‚ РїРѕСЌС‚РѕРјСѓ void
 	{
 		this->x = x;
 	}
@@ -54,7 +54,7 @@ public:
 		cout << "CopyAssignment:\t\t" << this << endl;
 		return *this;
 	}
-	double distance(const Point& other)const//const делает this недоступным для изменения
+	double distance(const Point& other)const//const РґРµР»Р°РµС‚ this РЅРµРґРѕСЃС‚СѓРїРЅС‹Рј РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ
 	{
 		double x_distance = this->x - other.x;
 		double y_distance = this->y - other.y;
@@ -97,7 +97,7 @@ double distance(const Point& A, const Point& B)
 }
 
 
-//#define STRUCT_POINT //имя макроса
+//#define STRUCT_POINT //РёРјСЏ РјР°РєСЂРѕСЃР°
 //#define CONSTRUCTOR_CHECK
 //#define DISTANCE_CHECK
 //#define ASSIGMENT_CHECK
@@ -105,12 +105,12 @@ double distance(const Point& A, const Point& B)
 void main()
 {
 	setlocale(LC_ALL, "Russian");
-#ifdef STRUCT_POINT//создаём именованые блоки кода чтобы мы могли их сворачивать разворачивать
-	int a;	//Объявление переменной 'a' типа 'int'
-	Point A;//Объявление переменной 'A' типа 'Point'
-	//Создание объекта 'A' структуры 'Point'
-	//Создание экземпляра 'A' структуры 'Point'
-	//Объекты классов и структур еще называют экземплярами классов и структур.
+#ifdef STRUCT_POINT//СЃРѕР·РґР°С‘Рј РёРјРµРЅРѕРІР°РЅС‹Рµ Р±Р»РѕРєРё РєРѕРґР° С‡С‚РѕР±С‹ РјС‹ РјРѕРіР»Рё РёС… СЃРІРѕСЂР°С‡РёРІР°С‚СЊ СЂР°Р·РІРѕСЂР°С‡РёРІР°С‚СЊ
+	int a;	//РћР±СЉСЏРІР»РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ 'a' С‚РёРїР° 'int'
+	Point A;//РћР±СЉСЏРІР»РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ 'A' С‚РёРїР° 'Point'
+	//РЎРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° 'A' СЃС‚СЂСѓРєС‚СѓСЂС‹ 'Point'
+	//РЎРѕР·РґР°РЅРёРµ СЌРєР·РµРјРїР»СЏСЂР° 'A' СЃС‚СЂСѓРєС‚СѓСЂС‹ 'Point'
+	//РћР±СЉРµРєС‚С‹ РєР»Р°СЃСЃРѕРІ Рё СЃС‚СЂСѓРєС‚СѓСЂ РµС‰Рµ РЅР°Р·С‹РІР°СЋС‚ СЌРєР·РµРјРїР»СЏСЂР°РјРё РєР»Р°СЃСЃРѕРІ Рё СЃС‚СЂСѓРєС‚СѓСЂ.
 
 	A.x = 2;
 	A.y = 3;
@@ -121,12 +121,12 @@ void main()
 #endif //STRUCT_POINT
 
 #ifdef CONSTRUCTOR_CHECK
-	Point A; //Здесь вызывается конструктор по умолчанию (Default
+	Point A; //Р—РґРµСЃСЊ РІС‹Р·С‹РІР°РµС‚СЃСЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ (Default
 	//A.set_x(2);
 	//A.set_y(3);
 	cout << A.get_x() << "\t" << A.get_y() << endl;
 	A.print();
-	Point B = 5; //вызывается конструктор с одним параметром
+	Point B = 5; //РІС‹Р·С‹РІР°РµС‚СЃСЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РѕРґРЅРёРј РїР°СЂР°РјРµС‚СЂРѕРј
 	B.print();
 
 	Point C(22, 33);
@@ -145,13 +145,13 @@ void main()
 	Point B(4, 5);
 	B.print();
 	cout << delimiter << endl;
-	cout << "Расстояние от точки А до точки В: " << A.distance(B) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё Рђ РґРѕ С‚РѕС‡РєРё Р’: " << A.distance(B) << endl;
 	cout << delimiter << endl;
-	cout << "Расстояние от точки В до точки А: " << B.distance(A) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё Р’ РґРѕ С‚РѕС‡РєРё Рђ: " << B.distance(A) << endl;
 	cout << delimiter << endl;
-	cout << "Расстояние между точками А и В: " << distance(A, B) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‚РѕС‡РєР°РјРё Рђ Рё Р’: " << distance(A, B) << endl;
 	cout << delimiter << endl;
-	cout << "Расстояние между точками B и A: " << distance(B, A) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‚РѕС‡РєР°РјРё B Рё A: " << distance(B, A) << endl;
 	cout << delimiter << endl;
 #endif //DISTANCE_CHECK
 
